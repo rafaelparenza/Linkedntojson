@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function processarHTML() {
+        const html = document.getElementById("htmlInput").value;
 
+        const div = document.createElement("div");
+        div.innerHTML = html;
+
+        const d = div.querySelector("main");
+        const perfil = div.querySelector("#ember243");
+        const sobre = div.querySelector("#ember561");
+        const exp = div.querySelector("#ember562");
+        const formacao = div.querySelector("#ember599");
+        const competencia = div.querySelector("#ember355");
+      const nome = Array.from(perfil.getElementsByTagName("*")).filter(el => el.getAttribute("class") && el.getAttribute("class").includes(""));
+      
+      let nomePerfil = "";
+      let tituloPerfil = "";
+      const Personal = new cvPessoa();
+
+      for (const link of Array.from(perfil.getElementsByTagName("*"))) {
+        const classe = link.getAttribute("class");
+        if (classe === "text-heading-xlarge inline t-24 v-align-middle break-words") {
+          Personal.nome = link.innerText.trim().replace(/[\r\n]/gm, "<br />");
+        }
+        if (classe === "text-body-medium break-words") {
+          Personal.titulo = link.innerText.trim().replace(/[\r\n]/gm, "<br />")
+        }
+      }
+
+      for (const link of Array.from(sobre.getElementsByTagName("*"))) {
+        const classe = link.getAttribute("class");
+        if (classe && classe.includes("inline-show-more-text")) {
+          Personal.Sobre = link.innerText.trim().replace(/[\r\n]/gm, "<br />");
+          break;
+        }
+      }
+
+      const expList = Array.from(exp.querySelector("ul").getElementsByTagName("li"));
+      for (const link of expList) {
+        const classe = link.getAttribute("class");
+        if (link.nodeName === "LI" && classe === "artdeco-list__item pvs-list__item--line-separated pvs-list__item--one-column") {
+          Personal.expercience.push(new Item());
+          var items = Array.from(link.querySelectorAll("span"))
+
+          for(const per of items)
+          {
+            if (per.className === "visually-hidden") {
+                Personal.expercience[Personal.expercience.length - 1].descricao.push(per.innerText);
+            }
+          }        
+        }
+    }
+        
+      
+
+      const formacaoList = Array.from(formacao.querySelector("ul").getElementsByTagName("li"));
+      for (const link of formacaoList) {
+        const classe = link.getAttribute("class");
+        if (link.nodeName === "LI" && classe === "artdeco-list__item pvs-list__item--line-separated pvs-list__item--one-column") {
+          Personal.formacao.push(new Item());
+          var items = Array.from(link.querySelectorAll("span"))
+
+          for(const per of items)
+          {
+            if (per.className === "visually-hidden") {
+                Personal.formacao[Personal.formacao.length - 1].descricao.push(per.innerText);
+            }
+          }        
+      }
+    }
+
+      const competenciaList = Array.from(competencia.querySelector("ul").getElementsByTagName("li"));
+      for (const link of competenciaList) {
+        const classe = link.getAttribute("class");
+        if (link.nodeName === "LI" && classe === "artdeco-list__item pvs-list__item--line-separated pvs-list__item--one-column") {
+          Personal.formacao.push(new Item());
+          var items = Array.from(link.querySelectorAll("span"))
+
+          for(const per of items)
+          {
+            if (per.className === "visually-hidden") {
+                Personal.formacao[Personal.formacao.length - 1].descricao.push(per.innerText);
+            }
+          }        
+      }
+      }
+
+      const jsonStr = JSON.stringify(Personal, null, 2);
+      console.log(jsonStr);
+
+      // Escrever o JSON no HTML
+      const outputDiv = document.getElementById("output");
+
+      outputDiv.innerHTML = "<pre>" + jsonStr.trim().replace(/[\r\n]/gm, "<br />") + "</pre>";
+    }
+
+    class cvPessoa {
+      constructor() {
+        this.nome = "";
+        this.titulo = "";
+        this.Sobre = "";
+        this.expercience = [];
+        this.competencia = [];
+        this.formacao = [];
+      }
+    }
+
+    class Item {
+      constructor() {
+        this.descricao = [];
+      }
+    }
+  </script>
+</head>
+<body>
+    <h1>HTML para JSON</h1>
+    <textarea id="htmlInput" rows="10" cols="50" placeholder="Cole ou digite o HTML aqui"></textarea>
+    <br>
+    <button onclick="processarHTML()">Processar</button>
+    <div id="output"></div>
+</body>
+</html>
