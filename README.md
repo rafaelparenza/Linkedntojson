@@ -1,4 +1,4 @@
-# Linkedntojson
+# Linkedlntojson
 # try to use
 https://rafaelparenza.github.io/Linkedntojson/
 
