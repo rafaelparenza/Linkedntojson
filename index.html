@@ -9,12 +9,27 @@
         div.innerHTML = html;
 
         const d = div.querySelector("main");
-        const perfil = div.querySelector("#ember243");
-        const sobre = div.querySelector("#ember561");
-        const exp = div.querySelector("#ember562");
-        const formacao = div.querySelector("#ember599");
-        const competencia = div.querySelector("#ember355");
-      const nome = Array.from(perfil.getElementsByTagName("*")).filter(el => el.getAttribute("class") && el.getAttribute("class").includes(""));
+
+        var filho = div.querySelector("#profile-sticky-header-toggle");
+        var pai = filho.parentNode;
+        var perfilid = pai.id;
+        filho = div.querySelector("#about");
+        pai = filho.parentNode;
+        var sobreid = pai.id;
+        filho = div.querySelector("#experience");
+        pai = filho.parentNode;
+        var expid = pai.id;
+        filho = div.querySelector("#education");
+        pai = filho.parentNode;
+        var eduid = pai.id;
+        filho = div.querySelector("#skills");
+        pai = filho.parentNode;
+        var skillid = pai.id;
+        const perfil = d.querySelector("#"+ perfilid);
+        const sobre = d.querySelector("#"+paiid);
+        const exp = d.querySelector("#" + expid);
+        const formacao = d.querySelector("#"+eduid);
+        const competencia = d.querySelector("#"+skillid);
       
       let nomePerfil = "";
       let tituloPerfil = "";
