@@ -1,0 +1,2 @@
+# Linkedntojson
+javascript solution for
