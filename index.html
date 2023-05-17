@@ -97,13 +97,13 @@
       for (const link of competenciaList) {
         const classe = link.getAttribute("class");
         if (link.nodeName === "LI" && classe === "artdeco-list__item pvs-list__item--line-separated pvs-list__item--one-column") {
-          Personal.formacao.push(new Item());
+          Personal.competencia.push(new Item());
           var items = Array.from(link.querySelectorAll("span"))
 
           for(const per of items)
           {
             if (per.className === "visually-hidden") {
-                Personal.formacao[Personal.formacao.length - 1].descricao.push(per.innerText);
+                Personal.competencia[Personal.competencia.length - 1].descricao.push(per.innerText);
             }
           }        
       }
