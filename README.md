@@ -25,4 +25,3 @@ Improvements to be added in the future:
 5) Paste - > https://rafaelparenza.github.io/Linkedntojson/
 
 
-Participate in the development or ask questions at: https://discord.gg/PWFmYTzf
